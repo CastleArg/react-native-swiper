@@ -124,7 +124,7 @@ export default function App() {
               <Animated.View
                 style={{
                   transform: [{ rotate: "30deg" }],
-                  positioxn: "absolute",
+                  position: "absolute",
                   top: 50,
                   right: 40,
                   zIndex: 1000,
