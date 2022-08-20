@@ -27,16 +27,18 @@ export default function App() {
           toValue: { x: SCREEN_WIDTH + 100, y: gestureState.dy },
           useNativeDriver: useNativeDriver
         }).start(() => {
+          position.x.setValue(0);
+          position.y.setValue(0);
           setCurrentIndex((currentIndex)=>currentIndex + 1)
-          position.flattenOffset();
         })
       } else if (gestureState.dx < -120) {
         Animated.spring(position, {
           toValue: { x: -SCREEN_WIDTH - 100, y: gestureState.dy },
           useNativeDriver: useNativeDriver
         }).start(() => {
+          position.x.setValue(0);
+          position.y.setValue(0);
           setCurrentIndex((currentIndex)=>currentIndex + 1)
-          position.flattenOffset();
         })
       } else {
         Animated.spring(position, {
@@ -52,7 +54,7 @@ export default function App() {
   // const panResponderDefault = 
   const renderPeople = () => {
     return people.map((x, i) =>
-      i < currentIndex ? null :
+      i < currentIndex ? <Text key={i}>`FOO: id:${x.id}, i:${i}`</Text> :
         <Animated.View
           {...panResponder?.panHandlers}
           key={i}
@@ -60,7 +62,7 @@ export default function App() {
             [
               i == currentIndex && {
                 transform: [
-                  { translateX: position.x }, { translateY: position.y },
+                  { translateX: position.x },
                   {
                     rotate: position.x.interpolate({
                       inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
@@ -70,7 +72,7 @@ export default function App() {
                   }
                 ]
               },
-              i !== currentIndex && {
+              i > currentIndex && {
                 opacity: position.x.interpolate({
                   inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
                   outputRange: [1, 0, 1],
