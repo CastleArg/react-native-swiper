@@ -20,7 +20,7 @@ export default function App() {
     //     useNativeDriver: useNativeDriver,
     //   });
     // },
-    onPanResponderMove:  Animated.event([null, {  dx: position.x, dy: position.y }], { useNativeDriver: useNativeDriver }),
+    onPanResponderMove: Animated.event([null, { dx: position.x, dy: position.y }], { useNativeDriver: useNativeDriver }),
     onPanResponderRelease: (evt, gestureState) => {
       if (gestureState.dx > 120) {
         Animated.spring(position, {
@@ -29,7 +29,7 @@ export default function App() {
         }).start(() => {
           position.x.setValue(0);
           position.y.setValue(0);
-          setCurrentIndex((currentIndex)=>currentIndex + 1)
+          setCurrentIndex((currentIndex) => currentIndex === people.length - 1 ? 0 : currentIndex + 1)
         })
       } else if (gestureState.dx < -120) {
         Animated.spring(position, {
@@ -38,7 +38,7 @@ export default function App() {
         }).start(() => {
           position.x.setValue(0);
           position.y.setValue(0);
-          setCurrentIndex((currentIndex)=>currentIndex + 1)
+          setCurrentIndex((currentIndex) => currentIndex === people.length - 1 ? 0 : currentIndex + 1)
         })
       } else {
         Animated.spring(position, {
@@ -172,9 +172,9 @@ export default function App() {
       <View style={{ height: 60 }} />
       <View style={{ flex: 1 }}>
         <Text>
-        {/* {`${currentIndex}`} */}
-      
-      </Text>
+          {/* {`${currentIndex}`} */}
+
+        </Text>
         {renderPeople()}
       </View>
       <View style={{ height: 60 }} />
