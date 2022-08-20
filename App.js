@@ -1,7 +1,7 @@
-import { StatusBar } from 'expo-status-bar';
+
 import { useEffect, useState, useRef } from 'react';
 import { StyleSheet, Text, View, Dimensions, Image, Animated, PanResponder } from 'react-native';
-import dummyData from './data'
+import dummyData from './data';
 const SCREEN_HEIGHT = Dimensions.get('window').height
 const SCREEN_WIDTH = Dimensions.get('window').width
 
@@ -13,7 +13,7 @@ export default function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const position = useRef(new Animated.ValueXY()).current;
   const panResponder = useRef(PanResponder.create({
-    onStartShouldSetPanResponder: (evt, gestureState) => true,
+    onStartShouldSetPanResponder: (evt, gerstureState) => true,
     // onPanResponderGrant: (evt, gestureState) => {
     //   position.setOffset({
     //     x: position.x._value,
@@ -54,7 +54,7 @@ export default function App() {
   // const panResponderDefault = 
   const renderPeople = () => {
     return people.map((x, i) =>
-      i < currentIndex ? <Text key={i}>`FOO: id:${x.id}, i:${i}`</Text> :
+      i < currentIndex ? null :
         <Animated.View
           {...panResponder?.panHandlers}
           key={i}
@@ -181,12 +181,3 @@ export default function App() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
